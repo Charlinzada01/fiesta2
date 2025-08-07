@@ -1,9 +1,14 @@
+
+const texto = "🎉 It's my birthday!! 🎉";
+
 // 🎉 Confetti al cargar la página
 confetti({
   particleCount: 150,
   spread: 120,
   origin: { y: 0.6 }
 });
+
+
 
 // 🎉 Confetti al descargar la tarjeta
 document.addEventListener('DOMContentLoaded', function () {
