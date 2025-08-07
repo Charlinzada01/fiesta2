@@ -250,21 +250,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 2. Efecto de máquina de escribir
-    const texto = "🎉 It's my birthday 🎉";
-    const speed = 100;
-    let i = 0;
+   // 2. Efecto de máquina de escribir
+const texto = "🎉 It's my birthday 🎉";
+const speed = 100;
+let i = 0;
 
-    function escribir() {
-        if (i < texto.length) {
-            document.getElementById("typewriter").innerHTML += texto.charAt(i);
-            i++;
-            setTimeout(escribir, speed);
-        }
+function escribir() {
+    if (i < texto.length) {
+        document.getElementById("typewriter").innerHTML += texto.charAt(i);
+        i++;
+        setTimeout(escribir, speed);
     }
-    
-    if(document.getElementById("typewriter")) {
-        escribir();
-    }
+}
+
+if (document.getElementById("typewriter")) {
+    escribir();
+}
+
+// 3. Confetti inicial
+confetti({
+    particleCount: 150,
+    spread: 120,
+    origin: { y: 0.6 }
+});
+
 
     // 3. Confetti inicial
     confetti({
