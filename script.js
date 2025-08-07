@@ -29,17 +29,26 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ✍️ Typewriter effect
-  const texto = "🎉 ¡Es mi cumpleaños! 🎉";
-  const speed = 100;
-  let i = 0;
-  function escribir() {
-    if (i < texto.length) {
-      document.getElementById("typewriter").innerHTML += texto.charAt(i);
-      i++;
-      setTimeout(escribir, speed);
+ <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const texto = "🎉Es mi cumpleaños!! 🎉";
+    const speed = 100;
+    let i = 0;
+
+    function escribir() {
+      if (i < texto.length) {
+        document.getElementById("typewriter").innerHTML += texto.charAt(i);
+        i++;
+        setTimeout(escribir, speed);
+      }
     }
-  }
-  escribir();
+
+    if (document.getElementById("typewriter")) {
+      escribir();
+    }
+  });
+</script>
+
 });
 
 // 🔥 Firebase (modular)
