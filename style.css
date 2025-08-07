@@ -2,7 +2,7 @@
 
 body {
   background: linear-gradient(to bottom right, #f8f4ff, #e6d4f7);
-  font-family: "Playwrite AU QLD", cursive;
+  font-family: "Playwrite AU QLD", "Segoe UI Emoji", "Arial", sans-serif;
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;
