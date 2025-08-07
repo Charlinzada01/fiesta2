@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+QLD:wght@100..400&display=swap');
 
 body {
-  background: linear-gradient(to bottom right, #f8f4ff, #e6d4f7);
+  background: linear-gradient(135deg, #fffbe5 0%, #ffe066 50%, #bfa14a 100%);
   font-family: "Playwrite AU QLD", "Segoe UI Emoji", "Arial", sans-serif;
   font-optical-sizing: auto;
   font-weight: 300;
@@ -9,7 +9,6 @@ body {
   color: #4a235a;
   padding-top: 50px;
 }
-
 
 h1, h2 {
 
