@@ -135,27 +135,10 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Función para guardar mensajes
-  function guardarMensaje(nombre, mensaje) {
-    let mensajes = JSON.parse(localStorage.getItem('mensajesCumple')) || [];
-    
-    const nuevoMensaje = {
-      id: Date.now(),
-      nombre: nombre,
-      mensaje: mensaje,
-      fecha: new Date().toLocaleDateString()
-    };
-    
-    mensajes.unshift(nuevoMensaje); // Agregar al inicio
-    localStorage.setItem('mensajesCumple', JSON.stringify(mensajes));
-    
-    cargarMensajes(); // Actualizar la lista
-  }
 
   // Función para cargar mensajes
   function cargarMensajes() {
-    const contenedor = document.getElementById('mensajes-recibidos');
-    const mensajes = JSON.parse(localStorage.getItem('mensajesCumple')) || [];
-    
+    const contenedor = document.getElementById('mensajes-recibidos');    
     contenedor.innerHTML = '';
     
     if(mensajes.length === 0) {
