@@ -5,9 +5,9 @@ confetti({
   origin: { y: 0.6 }
 });
 
-// 🎉 Efectos visuales (DOMContentLoaded)
-document.addEventListener("DOMContentLoaded", function () {
-  // Confetti al descargar
+// 🎉 Confetti y efecto de escribir al cargar el DOM
+document.addEventListener("DOMContentLoaded", () => {
+  // Confetti al hacer clic en descargar
   const btnDescargar = document.querySelector("a[download]");
   if (btnDescargar) {
     btnDescargar.addEventListener("click", function (e) {
@@ -24,11 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ✍️ Typewriter
+  // ✍️ Efecto de escribir
   const texto = "🎉Es mi cumpleaños!! 🎉";
   const speed = 100;
   let i = 0;
-
   function escribir() {
     if (i < texto.length) {
       document.getElementById("typewriter").innerHTML += texto.charAt(i);
@@ -42,10 +41,11 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// 🔥 Firebase (fuera de DOMContentLoaded)
+// 🔥 Firebase: IMPORTACIÓN Y LÓGICA (fuera del DOMContentLoaded)
 import("https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js").then(({ initializeApp }) => {
   import("https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js").then(({ getFirestore, collection, addDoc, onSnapshot }) => {
 
+    // Configuración Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyCeXxYxvBriXpNUdOHLO_uFz-OSaXzS7xk",
       authDomain: "fiesta2-e0d9b.firebaseapp.com",
@@ -55,13 +55,15 @@ import("https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js").then(({ init
       appId: "1:1056013652204:web:9685795901e0b04a9795c9"
     };
 
+    // Inicializar Firebase
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
+    // Elementos del DOM
     const formulario = document.getElementById("formularioMensaje");
     const lista = document.getElementById("listaMensajes");
 
-    // 📨 Enviar mensaje a Firebase
+    // Enviar mensaje a Firestore
     formulario.addEventListener("submit", async (e) => {
       e.preventDefault();
 
@@ -77,7 +79,7 @@ import("https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js").then(({ init
       }
     });
 
-    // 🔁 Mostrar mensajes en tiempo real
+    // Mostrar mensajes en tiempo real
     onSnapshot(collection(db, "mensajes"), (snapshot) => {
       lista.innerHTML = "";
       snapshot.forEach((doc) => {
@@ -88,5 +90,6 @@ import("https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js").then(({ init
         lista.appendChild(div);
       });
     });
+
   });
 });
