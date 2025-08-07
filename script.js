@@ -38,9 +38,11 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // 🔥 Firebase (modular)
+// Firebase imports desde CDN
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
 import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
+// Config de tu proyecto Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCeXxYxvBriXpNUdOHLO_uFz-OSaXzS7xk",
   authDomain: "fiesta2-e0d9b.firebaseapp.com",
@@ -50,60 +52,41 @@ const firebaseConfig = {
   appId: "1:1056013652204:web:9685795901e0b04a9795c9"
 };
 
+// Inicializa Firebase y Firestore
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// Elementos del DOM
 const formulario = document.getElementById("formularioMensaje");
 const lista = document.getElementById("listaMensajes");
 
+// Enviar mensaje a Firestore
 formulario.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const nombre = document.getElementById("nombre").value;
-  const mensaje = document.getElementById("mensaje").value;
 
-  await addDoc(collection(db, "mensajes"), {
-    nombre: nombre,
-    mensaje: mensaje
-  });
+  const nombre = document.getElementById("nombre").value.trim();
+  const mensaje = document.getElementById("mensaje").value.trim();
 
-  formulario.reset();
+  if (nombre && mensaje) {
+    await addDoc(collection(db, "mensajes"), {
+      nombre,
+      mensaje
+    });
+    formulario.reset();
+  }
 });
 
 // Mostrar mensajes en tiempo real
 onSnapshot(collection(db, "mensajes"), (snapshot) => {
-  lista.innerHTML = ""; // Limpia primero
-  snapshot.forEach((doc) => {
-    const data = doc.data();
-    const p = document.createElement("p");
-    p.textContent = `🎉 ${data.nombre}: ${data.mensaje}`;
-    lista.appendChild(p);
-  });
-});
-
-//aqui para borrar
-const formulario = document.getElementById("formularioMensaje");
-const lista = document.getElementById("listaMensajes");
-
-formulario.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const nombre = document.getElementById("nombre").value;
-  const mensaje = document.getElementById("mensaje").value;
-
-  await addDoc(collection(db, "mensajes"), {
-    nombre: nombre,
-    mensaje: mensaje
-  });
-
-  formulario.reset();
-});
-
-onSnapshot(collection(db, "mensajes"), (snapshot) => {
   lista.innerHTML = "";
   snapshot.forEach((doc) => {
     const data = doc.data();
-    const p = document.createElement("p");
-    p.textContent = `🎉 ${data.nombre}: ${data.mensaje}`;
-    lista.appendChild(p);
+    const div = document.createElement("div");
+    div.className = "mensaje";
+    div.innerHTML = `<strong>🎉 ${data.nombre}:</strong> ${data.mensaje}`;
+    lista.appendChild(div);
   });
 });
+
+
 
