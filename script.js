@@ -1,5 +1,5 @@
 
-const texto = "🎉 It's my birthday!! 🎉";
+const texto = "It's my birthday!!";
 
 // 🎉 Confetti al cargar la página
 confetti({
