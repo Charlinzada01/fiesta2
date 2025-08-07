@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>¡Feliz Cumpleaños!</title>
@@ -301,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.compartirInvitacion = function() {
         if (navigator.share) {
             navigator.share({
-                title: 'Invitación Cumpleaños Laryel',
+                title: 'It is my birthday!!',
                 text: '¡Estás invitado a mi fiesta de cumpleaños! 9 de Agosto',
                 url: window.location.href
             }).catch(err => {
