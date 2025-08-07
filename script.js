@@ -79,3 +79,31 @@ onSnapshot(collection(db, "mensajes"), (snapshot) => {
     lista.appendChild(p);
   });
 });
+
+//aqui para borrar
+const formulario = document.getElementById("formularioMensaje");
+const lista = document.getElementById("listaMensajes");
+
+formulario.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const nombre = document.getElementById("nombre").value;
+  const mensaje = document.getElementById("mensaje").value;
+
+  await addDoc(collection(db, "mensajes"), {
+    nombre: nombre,
+    mensaje: mensaje
+  });
+
+  formulario.reset();
+});
+
+onSnapshot(collection(db, "mensajes"), (snapshot) => {
+  lista.innerHTML = "";
+  snapshot.forEach((doc) => {
+    const data = doc.data();
+    const p = document.createElement("p");
+    p.textContent = `🎉 ${data.nombre}: ${data.mensaje}`;
+    lista.appendChild(p);
+  });
+});
+
