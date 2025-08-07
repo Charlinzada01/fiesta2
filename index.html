@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 2. Efecto de máquina de escribir
-    const texto = "🎉 Es mi cumpleaños 🎉";
+    const texto = "🎉 It's my birthday 🎉";
     const speed = 100;
     let i = 0;
 
@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.compartirInvitacion = function() {
         if (navigator.share) {
             navigator.share({
-                title: 'It is my birthday!!',
+                title: 'Es mi cumpleaños!!',
                 text: '¡Estás invitado a mi fiesta de cumpleaños! 9 de Agosto',
                 url: window.location.href
             }).catch(err => {
