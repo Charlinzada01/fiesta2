@@ -90,12 +90,13 @@ Así que guarden la fecha, preparen sus mejores outfits (o vengan en pijama, no 
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
     </button>
   </div>
-  <section class="container my-5">
-  <h2 class="mb-4">📝 Escribe tu mensaje de cumpleaños</h2>
+  <!-- Sección de Mensajes -->
+<section class="container my-5" id="seccion-mensajes">
+  <h2 class="mb-4">📝 Deja tu mensaje de cumpleaños</h2>
   <form id="formulario-mensaje" class="mb-4">
     <div class="mb-3">
       <label for="nombre" class="form-label">Tu nombre:</label>
-      <input type="text" class="form-control" id="nombre" required />
+      <input type="text" class="form-control" id="nombre" required>
     </div>
     <div class="mb-3">
       <label for="mensaje" class="form-label">Tu mensaje:</label>
@@ -105,9 +106,80 @@ Así que guarden la fecha, preparen sus mejores outfits (o vengan en pijama, no 
   </form>
 
   <h3 class="mb-3">📬 Mensajes recibidos:</h3>
-  <div id="mensajes-recibidos"></div>
+  <div id="mensajes-recibidos" class="row"></div>
 </section>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Cargar mensajes guardados al iniciar
+  cargarMensajes();
+
+  // Manejar el envío del formulario
+  document.getElementById('formulario-mensaje').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const nombre = document.getElementById('nombre').value.trim();
+    const mensaje = document.getElementById('mensaje').value.trim();
+    
+    if(nombre && mensaje) {
+      guardarMensaje(nombre, mensaje);
+      document.getElementById('formulario-mensaje').reset();
+      
+      // Mostrar confeti al enviar mensaje
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }
+  });
+
+  // Función para guardar mensajes
+  function guardarMensaje(nombre, mensaje) {
+    let mensajes = JSON.parse(localStorage.getItem('mensajesCumple')) || [];
+    
+    const nuevoMensaje = {
+      id: Date.now(),
+      nombre: nombre,
+      mensaje: mensaje,
+      fecha: new Date().toLocaleDateString()
+    };
+    
+    mensajes.unshift(nuevoMensaje); // Agregar al inicio
+    localStorage.setItem('mensajesCumple', JSON.stringify(mensajes));
+    
+    cargarMensajes(); // Actualizar la lista
+  }
+
+  // Función para cargar mensajes
+  function cargarMensajes() {
+    const contenedor = document.getElementById('mensajes-recibidos');
+    const mensajes = JSON.parse(localStorage.getItem('mensajesCumple')) || [];
+    
+    contenedor.innerHTML = '';
+    
+    if(mensajes.length === 0) {
+      contenedor.innerHTML = '<p class="text-muted">Aún no hay mensajes. ¡Sé el primero!</p>';
+      return;
+    }
+    
+    mensajes.forEach(msg => {
+      const mensajeHTML = `
+        <div class="col-md-6 mb-3">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">${msg.nombre}</h5>
+              <p class="card-text">${msg.mensaje}</p>
+              <small class="text-muted">${msg.fecha}</small>
+            </div>
+          </div>
+        </div>
+      `;
+      contenedor.innerHTML += mensajeHTML;
+    });
+  }
+});
+</script>
 <section class="descarga-tarjeta container text-center py-5">
     <div class="card shadow-lg p-4" style="max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 15px;">
         <h2 class="mb-4" style="color: #d63384; font-weight: 700;">🎉 ¡Descarga tu Invitación Especial! 🎉</h2>
