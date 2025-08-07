@@ -71,7 +71,7 @@ formulario.addEventListener("submit", async (e) => {
 
 // Mostrar mensajes en tiempo real
 onSnapshot(collection(db, "mensajes"), (snapshot) => {
-  lista.innerHTML = "";
+  lista.innerHTML = ""; // Limpia primero
   snapshot.forEach((doc) => {
     const data = doc.data();
     const p = document.createElement("p");
